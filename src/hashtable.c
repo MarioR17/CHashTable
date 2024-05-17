@@ -1,8 +1,10 @@
+// hashtable.c
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include <hashtable.h>
+#include "hashtable.h"
 
 static htItem * htNewItem(const char * k, const char * v) {
     htItem * i = malloc(sizeof(htItem));
@@ -13,7 +15,7 @@ static htItem * htNewItem(const char * k, const char * v) {
 }
 
 htHashTable * htNew() {
-    htHashtable * ht = malloc(sizeof(htHashTable));
+    htHashTable * ht = malloc(sizeof(htHashTable));
 
     ht->size = 53; 
     ht->count = 0;
@@ -28,7 +30,7 @@ static void htDelItem(htItem * i) {
     free(i);
 }
 
-void htDelHashtable(htHashTable * ht) {
+void htDelHashTable(htHashTable * ht) {
     for (int i = 0; i < ht->size; i++) {
         htItem * item = ht->items[i]; 
         if (item != NULL) {
