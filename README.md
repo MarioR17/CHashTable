@@ -1,3 +1,3 @@
-# KumarChat
+# Overview
 
-We are going to be making Kumar Chat!!!
+I will be making a hashtable in C.
