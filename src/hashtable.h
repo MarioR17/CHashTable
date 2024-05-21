@@ -15,5 +15,6 @@ typedef struct {
 
 htHashTable * htNew();
 void htDelHashTable(htHashTable * ht);
+unsigned int hashedKeyIndex(const char * str);
 
 #endif // HASHTABLE_H

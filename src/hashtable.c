@@ -42,5 +42,25 @@ void htDelHashTable(htHashTable * ht) {
     free(ht);
 }
 
+static unsigned int hashKey(const char * str) {
+    unsigned int hash = 5381;
+
+    int c;
+
+    while ((c = *str++)) {
+        hash = ((hash << 5) + hash) + c; 
+    }
+
+    return hash;
+}
+
+unsigned int hashedKeyIndex(const char * str) {
+    unsigned int hash = hashKey(str);
+
+    return (hash % 53);
+}
+
+
+
 
 
