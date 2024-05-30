@@ -32,15 +32,17 @@ static void deleteItem(Item * i) {
 }
 
 void deleteHashTable(HashTable * ht) {
-    for (int i = 0; i < ht->size; i++) {
-        Item * item = ht->items[i]; 
-        if (item != NULL) {
-            deleteItem(item);
+    if (ht != NULL) {
+        for (int i = 0; i < ht->size; i++) {
+            Item * item = ht->items[i]; 
+            if (item != NULL) {
+                deleteItem(item);
+            }
         }
-    }
 
-    free(ht->items);
-    free(ht);
+        free(ht->items);
+        free(ht);
+    }
 }
 
 static unsigned int hashKey(const char * str) {
@@ -65,15 +67,13 @@ void printHashTable(HashTable * ht) {
     if (ht == NULL) {
         printf("{}\n");
     } else {
+        printf("{ ");
         for (int i = 0; i < ht->size; i++) {
-            if (i == 0) {
-                printf("{%c:%c, ", *(ht->items[i]->key), *(ht->items[i]->value));
-            } else if (i == ht->size - 1) {
-                printf("%c:%c}", *(ht->items[i]->key), *(ht->items[i]->value));
-            } else {
+            if (ht->items[i] != NULL) {
                 printf("%c:%c, ", *(ht->items[i]->key), *(ht->items[i]->value));
             }
         }
+        printf("}");
     }   
 }
 
