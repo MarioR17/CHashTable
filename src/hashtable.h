@@ -5,16 +5,17 @@
 typedef struct {
     char * key;
     char * value;
-} htItem;
+} Item;
 
 typedef struct {
     int size;
     int count;
-    htItem ** items;
-} htHashTable;
+    Item ** items;
+} HashTable;
 
-htHashTable * htNew();
-void htDelHashTable(htHashTable * ht);
+HashTable * createHashTable();
+void deleteHashTable(HashTable * ht);
 unsigned int hashedKeyIndex(const char * str);
+void printHashTable(HashTable * ht);
 
 #endif // HASHTABLE_H

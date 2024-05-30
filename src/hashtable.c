@@ -1,40 +1,41 @@
 // hashtable.c
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "hashtable.h"
 
-static htItem * htNewItem(const char * k, const char * v) {
-    htItem * i = malloc(sizeof(htItem));
+static Item * createItem(const char * k, const char * v) {
+    Item * i = malloc(sizeof(Item));
     i->key = strdup(k);
     i->value = strdup(v);
 
     return i;
 }
 
-htHashTable * htNew() {
-    htHashTable * ht = malloc(sizeof(htHashTable));
+HashTable * createHashTable() {
+    HashTable * ht = malloc(sizeof(HashTable));
 
     ht->size = 53; 
     ht->count = 0;
-    ht->items = calloc((size_t) ht->size, sizeof(htItem *));
+    ht->items = calloc((size_t) ht->size, sizeof(Item *));
 
     return ht;
 }
 
-static void htDelItem(htItem * i) {
+static void deleteItem(Item * i) {
     free(i->key);
     free(i->value);
     free(i);
 }
 
-void htDelHashTable(htHashTable * ht) {
+void deleteHashTable(HashTable * ht) {
     for (int i = 0; i < ht->size; i++) {
-        htItem * item = ht->items[i]; 
+        Item * item = ht->items[i]; 
         if (item != NULL) {
-            htDelItem(item);
+            deleteItem(item);
         }
     }
 
@@ -58,6 +59,22 @@ unsigned int hashedKeyIndex(const char * str) {
     unsigned int hash = hashKey(str);
 
     return (hash % 53);
+}
+
+void printHashTable(HashTable * ht) {
+    if (ht == NULL) {
+        printf("{}\n");
+    } else {
+        for (int i = 0; i < ht->size; i++) {
+            if (i == 0) {
+                printf("{%c:%c, ", *(ht->items[i]->key), *(ht->items[i]->value));
+            } else if (i == ht->size - 1) {
+                printf("%c:%c}", *(ht->items[i]->key), *(ht->items[i]->value));
+            } else {
+                printf("%c:%c, ", *(ht->items[i]->key), *(ht->items[i]->value));
+            }
+        }
+    }   
 }
 
 
