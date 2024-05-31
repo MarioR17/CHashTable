@@ -104,6 +104,9 @@ void addItem(HashTable * ht, char * k, char * v) {
             unsigned int keyHash = hashKey(k);
 
             ht->items[keyHash] = item;
+            ht->count++;
+        } else {
+            deleteItem(item);
         }
     }
 
@@ -117,7 +120,7 @@ void printHashTable(HashTable * ht) {
         printf("{ ");
         for (int i = 0; i < ht->size; i++) {
             if (ht->items[i] != NULL) {
-                printf("%c:%c, ", *(ht->items[i]->key), *(ht->items[i]->value));
+                printf("%s:%s, ", ht->items[i]->key, ht->items[i]->value);
             }
         }
         printf("}\n");
