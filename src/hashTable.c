@@ -58,6 +58,9 @@ static void deleteItem(Item * i) {
     if (i != NULL) {
         free(i->key);
         free(i->value);
+        if (i->next != NULL) {
+             
+        }
         free(i);
     }
 }
@@ -87,14 +90,6 @@ unsigned int hashKey(const char * str) {
 
     return (hash % 53);
 }
-
-/*
-unsigned int hashedKeyIndex(const char * str) {
-    unsigned int hash = hashKey(str);
-
-    return (hash % 53);
-}
-*/
 
 void addItem(HashTable * ht, char * k, char * v) {
     if (ht != NULL) {
