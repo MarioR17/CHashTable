@@ -58,9 +58,6 @@ static void deleteItem(Item * i) {
     if (i != NULL) {
         free(i->key);
         free(i->value);
-        if (i->next != NULL) {
-             
-        }
         free(i);
     }
 }

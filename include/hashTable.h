@@ -5,7 +5,6 @@
 typedef struct {
     char * key;
     char * value;
-    char * next;
 } Item;
 
 typedef struct {
