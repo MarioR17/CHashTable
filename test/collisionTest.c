@@ -34,7 +34,7 @@ int main(void) {
     addItem(ht, keyThree, valThree); // 4 -> 0
     addItem(ht, keyFour, valFour); // 1 -> 1
     addItem(ht, keyFive, valFive); // 0 -> 3
-
+    
     // Print the hash table out
     printHashTable(ht);
 }
