@@ -8,14 +8,14 @@ typedef struct {
 } Item;
 
 typedef struct {
-    int size;
-    int count;
+    unsigned int size;
+    unsigned int count;
     Item ** items;
 } HashTable;
 
 HashTable * createHashTable();
 void deleteHashTable(HashTable * ht);
-unsigned int hashKey(const char * str);
+unsigned int hashKey(HashTable * ht, const char * str);
 void printHashTable(HashTable * ht);
 void addItem(HashTable * ht, char * k, char * v);
 

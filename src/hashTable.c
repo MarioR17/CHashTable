@@ -10,7 +10,7 @@
 static Item * createItem(const char * k, const char * v) {
     Item * i = NULL;
 
-    if (k != NULL || v != NULL) {
+    if (k != NULL && v != NULL) {
         i = malloc(sizeof(Item));
         if (i == NULL) {
             printf("ERROR: Unable to allocate memory for item\n");
@@ -22,7 +22,6 @@ static Item * createItem(const char * k, const char * v) {
             printf("ERROR: Unable to allocate memory for item's key\n");
             exit(1);
         }
-
 
         i->value = strdup(v);
         if (i->value == NULL) {
@@ -42,7 +41,7 @@ HashTable * createHashTable(void) {
         exit(1);
     }
 
-    ht->size = 53; 
+    ht->size = 5; 
     ht->count = 0;
 
     ht->items = calloc((size_t) ht->size, sizeof(Item *));
@@ -64,7 +63,7 @@ static void deleteItem(Item * i) {
 
 void deleteHashTable(HashTable * ht) {
     if (ht != NULL) {
-        for (int i = 0; i < ht->size; i++) {
+        for (unsigned int i = 0; i < ht->size; i++) {
             Item * item = ht->items[i]; 
             if (item != NULL) {
                 deleteItem(item);
@@ -76,7 +75,7 @@ void deleteHashTable(HashTable * ht) {
     }
 }
 
-unsigned int hashKey(const char * str) {
+unsigned int hashKey(HashTable * ht, const char * str) {
     unsigned int hash = 5381;
 
     int c;
@@ -85,7 +84,7 @@ unsigned int hashKey(const char * str) {
         hash = ((hash << 5) + hash) + c; 
     }
 
-    return (hash % 53);
+    return (hash % (ht->size));
 }
 
 void addItem(HashTable * ht, char * k, char * v) {
@@ -93,8 +92,16 @@ void addItem(HashTable * ht, char * k, char * v) {
         Item * item = createItem(k, v);
 
         if (item != NULL) {
-            unsigned int keyHash = hashKey(k);
+            unsigned int keyHash = hashKey(ht, k);
 
+            while (ht->items[keyHash] != NULL) {
+                printf("Current Idx for %s: %u\n", k, keyHash);
+                if (keyHash == (ht->size - 1)) {
+                    keyHash = 0;
+                } else {
+                    keyHash++;
+                }
+            }
             ht->items[keyHash] = item;
             ht->count++;
         } else {
@@ -110,16 +117,12 @@ void printHashTable(HashTable * ht) {
         printf("{}\n");
     } else {
         printf("{ ");
-        for (int i = 0; i < ht->size; i++) {
+        for (unsigned int i = 0; i < ht->size; i++) {
             if (ht->items[i] != NULL) {
-                printf("%s:%s, ", ht->items[i]->key, ht->items[i]->value);
+                printf("%s:%s (idx: %u), ", ht->items[i]->key, ht->items[i]->value, i);
             }
         }
         printf("}\n");
     }   
 }
-
-
-
-
 
