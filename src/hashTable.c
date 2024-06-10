@@ -95,7 +95,7 @@ void addItem(HashTable * ht, char * k, char * v) {
             unsigned int keyHash = hashKey(ht, k);
 
             while (ht->items[keyHash] != NULL) {
-                printf("Current Idx for %s: %u\n", k, keyHash);
+                //printf("Current Idx for %s: %u\n", k, keyHash);
                 if (keyHash == (ht->size - 1)) {
                     keyHash = 0;
                 } else {
@@ -119,7 +119,7 @@ void printHashTable(HashTable * ht) {
         printf("{ ");
         for (unsigned int i = 0; i < ht->size; i++) {
             if (ht->items[i] != NULL) {
-                printf("%s:%s (idx: %u), ", ht->items[i]->key, ht->items[i]->value, i);
+                printf("%s:%s, ", ht->items[i]->key, ht->items[i]->value);
             }
         }
         printf("}\n");

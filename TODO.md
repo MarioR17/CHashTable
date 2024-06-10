@@ -1,6 +1,8 @@
 # TODO
 
+* Make a lookup method that gets the value of the corresponding key in the table
+* Test the lookup
 * Resize hashtable to an array of the next big prime number when count is half of size
 * Readd in every item to the new array with the new hashes
-* Test these components
-
+* Test these resizing and rehashing
+* Test time of methods like lookup, adding, etc. to make sure they match other Hash Table implementations
