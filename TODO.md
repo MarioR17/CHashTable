@@ -1,7 +1,7 @@
 # TODO
 
 * [x] Finalize collisionTest test so that stuff gets printed out based on output
-* Make a lookup method that gets the value of the corresponding key in the table
+* IN PROGRESS: Make a lookup method that gets the value of the corresponding key in the table
 * Test the lookup
 * Resize hashtable to an array of the next big prime number when count is half of size
 * Readd in every item to the new array with the new hashes
