@@ -10,13 +10,13 @@ int main(void) {
     char * itemFive = "x";
     char * itemSix = "abc";
 
-    printf("%s -> %u\n", itemOne, hashKey(ht, itemOne));
-    printf("%s -> %u\n", itemTwo, hashKey(ht, itemTwo));
-    printf("%s -> %u\n", itemThree, hashKey(ht, itemThree));
-    printf("%s -> %u\n", itemFour, hashKey(ht, itemFour));
-    printf("%s -> %u\n", itemFive, hashKey(ht, itemFive));
+    printf("%s -> %u\n", itemOne, hashIndex(ht, itemOne));
+    printf("%s -> %u\n", itemTwo, hashIndex(ht, itemTwo));
+    printf("%s -> %u\n", itemThree, hashIndex(ht, itemThree));
+    printf("%s -> %u\n", itemFour, hashIndex(ht, itemFour));
+    printf("%s -> %u\n", itemFive, hashIndex(ht, itemFive));
     
-    if (hashKey(ht, itemOne) != hashKey(ht, itemSix)) {
+    if (hashIndex(ht, itemOne) != hashIndex(ht, itemSix)) {
         printf(
         "ERROR: Identical keys (itemOne: %s & itemSix: %s) have different hashes\n"
         , itemOne, itemSix);

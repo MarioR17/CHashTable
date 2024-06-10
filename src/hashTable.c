@@ -75,7 +75,7 @@ void deleteHashTable(HashTable * ht) {
     }
 }
 
-unsigned int hashKey(HashTable * ht, const char * str) {
+static unsigned int hashKey(HashTable * ht, const char * str) {
     unsigned int hash = 5381;
 
     int c;
@@ -87,29 +87,31 @@ unsigned int hashKey(HashTable * ht, const char * str) {
     return (hash % (ht->size));
 }
 
-void addItem(HashTable * ht, char * k, char * v) {
+unsigned int hashIndex(HashTable * ht, const char * k) {
+    unsigned int hash = hashKey(ht, k);
+    while (ht->items[hash] != NULL) {
+        if (hash == (ht->size - 1)) {
+            hash = 0;
+        } else {
+            hash++;
+        }
+    }
+
+    return hash;
+}
+
+void addItem(HashTable * ht, const char * k, const char * v) {
     if (ht != NULL) {
         Item * item = createItem(k, v);
 
         if (item != NULL) {
-            unsigned int keyHash = hashKey(ht, k);
-
-            while (ht->items[keyHash] != NULL) {
-                //printf("Current Idx for %s: %u\n", k, keyHash);
-                if (keyHash == (ht->size - 1)) {
-                    keyHash = 0;
-                } else {
-                    keyHash++;
-                }
-            }
+            unsigned int keyHash = hashIndex(ht, k);;
             ht->items[keyHash] = item;
             ht->count++;
         } else {
             deleteItem(item);
         }
     }
-
-
 }
 
 void printHashTable(HashTable * ht) {

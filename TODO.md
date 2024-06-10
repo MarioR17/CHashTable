@@ -1,5 +1,6 @@
 # TODO
 
+* Finalize collisionTest test so that stuff gets printed out based on output
 * Make a lookup method that gets the value of the corresponding key in the table
 * Test the lookup
 * Resize hashtable to an array of the next big prime number when count is half of size
