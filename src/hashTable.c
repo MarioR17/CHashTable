@@ -128,19 +128,27 @@ void printHashTable(HashTable * ht) {
     }   
 }
 
-unsigned int getIndex(HashTable * ht, char * k) {
+int getIndex(HashTable * ht, char * k) {
+    int done = 0;
     unsigned int idx = hashKey(ht, k);
 
-    while (strcmp(ht->items[idx]->key, k) != 0) {
+    if (ht->items[idx] == NULL) {
+        return -1;
+    }
+
+    while (!done) {
         if (ht->items[idx] == NULL) {
-            idx = -1;
-            break;
+            return -1;
         }
 
-        if (idx == (ht->size - 1)) {
-            idx = 0;
+        if (strcmp(ht->items[idx]->key, k) != 0) {
+            if (idx == (ht->size - 1)) {
+                idx = 0;
+            } else {
+                idx++;
+            }
         } else {
-            idx++;
+            done = 1;
         }
     }
 
