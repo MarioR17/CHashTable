@@ -37,5 +37,7 @@ int main(void) {
     
     // Print the hash table out
     printHashTable(ht);
+
+    return 0;
 }
 
