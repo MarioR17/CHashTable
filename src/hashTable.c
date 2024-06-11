@@ -105,9 +105,11 @@ void addItem(HashTable * ht, const char * k, const char * v) {
         Item * item = createItem(k, v);
 
         if (item != NULL) {
-            unsigned int keyHash = hashIndex(ht, k);;
-            ht->items[keyHash] = item;
-            ht->count++;
+            if (ht->size >= (ht->size / 2)) {
+                unsigned int keyHash = hashIndex(ht, k);
+                ht->items[keyHash] = item;
+                ht->count++;
+            }
         } else {
             deleteItem(item);
         }
@@ -180,3 +182,10 @@ unsigned int nextPrime(unsigned int num) {
 
     return next;
 }
+
+void resizeHashTable(HashTable * ht) {
+    unsigned int nextSize = nextPrime(ht->size);
+    ht->size = nextSize;
+}
+
+
