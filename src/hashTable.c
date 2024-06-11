@@ -191,8 +191,8 @@ void resizeHashTable(HashTable * ht) {
 
 HashTable* reHashTable(HashTable * oldHt) {
     HashTable * newHt = createHashTable();
-    unsigned int newSize = nextPrime(oldHt->size);
-    newHt->size = newSize; 
+    newHt->size = oldHt->size;
+    resizeHashTable(newHt);
 
     for (unsigned int i = 0; i < oldHt->size; i++) {
         if (oldHt->items[i] != NULL) {
