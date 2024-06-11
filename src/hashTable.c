@@ -155,3 +155,28 @@ int getIndex(HashTable * ht, char * k) {
     return idx;
 }
 
+static unsigned int isPrime(const unsigned int num) {
+    for (unsigned int i = 2; i < num; i++) { 
+        if (num % i == 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+unsigned int nextPrime(unsigned int num) {
+    int done = 0;
+    int next = 0;
+    num++;
+
+    while (!done) {
+        if (isPrime(num)) {
+            next = num;
+            done = 1;
+        } 
+        num++;
+    }
+
+    return next;
+}
