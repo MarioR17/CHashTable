@@ -33,4 +33,6 @@ clean:
 # Let them know it's all clean
 .PHONY: all clean
 
+# Add a 'refresh' target to clean and then rebuild everything
+refresh: clean all
 

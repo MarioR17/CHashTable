@@ -106,14 +106,11 @@ void addItem(HashTable * ht, const char * k, const char * v) {
 
         if (item != NULL) {
             if (ht->count >= (ht->size / 2)) {
-                printf("B4 change: \n");
-                printHashTable(ht);
+                puts("Trying to add an item");
                 HashTable * newHt = reHashTable(ht);
                 unsigned int keyHash = hashIndex(newHt, k);
                 newHt->items[keyHash] = item;
                 newHt->count++;
-                printf("After change: \n");
-                printHashTable(ht);
             } else {
                 unsigned int keyHash = hashIndex(ht, k);
                 ht->items[keyHash] = item;
@@ -209,7 +206,11 @@ HashTable* reHashTable(HashTable * oldHt) {
 
         }
     }
+    printHashTable(oldHt);
+    printHashTable(newHt);
+    printf("%u\n", newHt->size);
     deleteHashTable(oldHt);
+    puts("breaking after here?");
 
     return newHt;
 }
