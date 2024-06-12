@@ -106,10 +106,18 @@ void addItem(HashTable * ht, const char * k, const char * v) {
 
         if (item != NULL) {
             if (ht->count >= (ht->size / 2)) {
-                HashTable * newHt = resizeHashTable(ht);
+                printf("B4 change: \n");
+                printHashTable(ht);
+                HashTable * newHt = reHashTable(ht);
                 unsigned int keyHash = hashIndex(newHt, k);
                 newHt->items[keyHash] = item;
                 newHt->count++;
+                printf("After change: \n");
+                printHashTable(ht);
+            } else {
+                unsigned int keyHash = hashIndex(ht, k);
+                ht->items[keyHash] = item;
+                ht->count++;
             }
         } else {
             deleteItem(item);
