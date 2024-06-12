@@ -27,9 +27,6 @@ int main(void) {
     addItem(ht, keyOne, valueOne);
     printHashTable(ht);
     addItem(ht, keyTwo, valueTwo);
-    if (ht->items[30911] == NULL ) {
-        printf("yoooooo\n");
-    }
     printHashTable(ht);
     //printf("ht size yo: %u\n", ht->size);
     addItem(ht, keyThree, valueThree);
