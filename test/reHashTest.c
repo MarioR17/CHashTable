@@ -27,10 +27,13 @@ int main(void) {
     addItem(ht, keyOne, valueOne);
     printHashTable(ht);
     addItem(ht, keyTwo, valueTwo);
+    if (ht->items[309112] == NULL ) {
+        printf("yoooooo\n");
+    }
     printHashTable(ht);
-    printf("ht size: %u\n", ht->size);
+    //printf("ht size yo: %u\n", ht->size);
     addItem(ht, keyThree, valueThree);
-    printf("ht size: %u\n", ht->size);
+    printf("ht size yo2: %u\n", ht->size);
     addItem(ht, keyFour, valueFour);
     printf("ht size: %u\n", ht->size);
     addItem(ht, keyFive, valueFive);

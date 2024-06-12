@@ -64,9 +64,8 @@ static void deleteItem(Item * i) {
 void deleteHashTable(HashTable * ht) {
     if (ht != NULL) {
         for (unsigned int i = 0; i < ht->size; i++) {
-            Item * item = ht->items[i]; 
-            if (item != NULL) {
-                deleteItem(item);
+            if (ht->items[i] != NULL) {
+                deleteItem(ht->items[i]);
             }
         }
 
@@ -106,7 +105,6 @@ void addItem(HashTable * ht, const char * k, const char * v) {
 
         if (item != NULL) {
             if (ht->count >= (ht->size / 2)) {
-                puts("Trying to add an item");
                 HashTable * newHt = reHashTable(ht);
                 unsigned int keyHash = hashIndex(newHt, k);
                 newHt->items[keyHash] = item;
@@ -201,16 +199,12 @@ HashTable* reHashTable(HashTable * oldHt) {
 
     for (unsigned int i = 0; i < oldHt->size; i++) {
         if (oldHt->items[i] != NULL) {
+            //printf("Item %u's key: %s\n", i, oldHt->items[i]->key);
+            //printf("Item %u's value: %s\n", i, oldHt->items[i]->value);
             addItem(newHt, oldHt->items[i]->key, oldHt->items[i]->value);
-            deleteItem(oldHt->items[i]);
-
         }
     }
-    printHashTable(oldHt);
-    printHashTable(newHt);
-    printf("%u\n", newHt->size);
     deleteHashTable(oldHt);
-    puts("breaking after here?");
 
     return newHt;
 }
