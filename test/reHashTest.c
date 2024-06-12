@@ -25,6 +25,7 @@ int main(void) {
     printf("Current ht size: %u\n", ht->size);
 
     addItem(ht, keyOne, valueOne);
+    printHashTable(ht);
     addItem(ht, keyTwo, valueTwo);
     printHashTable(ht);
     printf("ht size: %u\n", ht->size);
