@@ -190,6 +190,11 @@ unsigned int nextPrime(unsigned int num) {
 void resizeHashTable(HashTable * ht) {
     unsigned int nextSize = nextPrime(ht->size);
     ht->size = nextSize;
+    ht->items = calloc((size_t) ht->size, sizeof(Item *));
+    if (ht->items == NULL) {
+        printf("ERROR: Unable to allocate memory for hash table items\n");
+        exit(1);
+    }
 }
 
 HashTable* reHashTable(HashTable * oldHt) {
