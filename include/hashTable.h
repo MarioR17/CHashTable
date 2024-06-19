@@ -17,7 +17,7 @@ HashTable * createHashTable();
 void deleteHashTable(HashTable * ht);
 unsigned int hashIndex(HashTable * ht, const char * k);
 void printHashTable(HashTable * ht);
-void reHashTable(HashTable * oldHt);
+HashTable * reHashTable(HashTable * oldHt);
 void resizeHashTable(HashTable * ht);
 void addItem(HashTable * ht, const char * k, const char * v);
 int getIndex(HashTable * ht, char * k);

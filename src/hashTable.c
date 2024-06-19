@@ -106,12 +106,15 @@ void addItem(HashTable * ht, const char * k, const char * v) {
         if (item != NULL) {
             if (ht->count >= (ht->size / 2)) {
                 //puts("printing old in add item b4 rehashing");
-                printHashTable(ht);
-                reHashTable(ht);
+                HashTable * newHt = reHashTable(ht);
+                puts("print after rehash apparently");
+                printf("%u\n", newHt->size);
+                printf("%u\n", newHt->count);
+                printHashTable(newHt);
                 //puts("printing new in add item after rehashing");
-                unsigned int keyHash = hashIndex(ht, k);
-                ht->items[keyHash] = item;
-                ht->count++;
+                unsigned int keyHash = hashIndex(newHt, k);
+                newHt->items[keyHash] = item;
+                newHt->count++;
             } else {
                 //puts("heh... hey");
                 unsigned int keyHash = hashIndex(ht, k);
@@ -128,9 +131,11 @@ void printHashTable(HashTable * ht) {
     if (ht == NULL) {
         printf("{}\n");
     } else {
+        unsigned int currCount = 0;
         printf("{ ");
-        for (unsigned int i = 0; i < ht->size; i++) {
+        for (unsigned int i = 0; i < ht->size && currCount < ht->count; i++) {
             if (ht->items[i] != NULL) {
+                currCount++;
                 printf("%s:%s, ", ht->items[i]->key, ht->items[i]->value);
             }
         }
@@ -196,34 +201,41 @@ void resizeHashTable(HashTable * ht) {
     printf("%u\n", ht->size);
     ht->size = nextSize;
     printf("%p\n", ht->items);
-    ht->items = realloc(ht->items, ht->size);
-    printf("%u\n", ht->size);
-    printf("%p\n", ht->items);
-    printHashTable(ht);
-    addItem(ht, "Gabe", "Slate");
-    printHashTable(ht);
-    
+    ht->items = realloc(ht->items, ht->size * sizeof(Item *));
+        
     if (ht->items == NULL) {
         printf("ERROR: Unable to allocate memory for hash table items\n");
         exit(1);
     }
+    printf("%u\n", ht->size);
+    printf("%p\n", ht->items);
+    /*
+    puts("should break right about now");
+    printHashTable(ht);
+    addItem(ht, "Gabe", "Slate");
+    printHashTable(ht);
+    */
 }
 
-void reHashTable(HashTable * oldHt) {
+HashTable * reHashTable(HashTable * oldHt) {
     HashTable * newHt = createHashTable();
     //puts("AB to print in rehash (new then old)");
     printHashTable(oldHt);
+    printHashTable(newHt);
     newHt->size = oldHt->size;
+    puts("Koda");
+    printHashTable(newHt);
     resizeHashTable(newHt);
+    puts("Mikey");
+    printHashTable(newHt);
     puts("Next should be empty");
     addItem(newHt, "Gage", "Needs");
     printHashTable(newHt);
-    printHashTable(oldHt);
     //printf("%u\n", oldHt->size);
     //printf("%u\n", newHt->size);
 
-    //puts("Starting");
-    //printf("%u\n", newHt->count);
+    puts("Starting");
+    printf("%u\n", newHt->count);
     for (unsigned int i = 0; i < oldHt->size; i++) {
         if (oldHt->items[i] != NULL) {
             //printf("Item %u's key: %s\n", i, oldHt->items[i]->key);
@@ -236,11 +248,10 @@ void reHashTable(HashTable * oldHt) {
     printHashTable(oldHt);
     printf("%u\n", newHt->size);
     printf("%u\n", newHt->count);
-    printHashTable(newHt);
+    //printHashTable(newHt);
     deleteHashTable(oldHt);
 
-    oldHt = newHt;
+    return newHt;
 }
-
 
 
