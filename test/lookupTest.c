@@ -17,7 +17,6 @@ int main(void) {
     char * valOne = "Tekken";
     char * valTwo = "Brawlhalla";
     char * valThree = "RL";
-    //char * valFour = "SMT";
     char * valFive = "DoorDash";
 
     addItem(ht, keyOne, valOne); // 2 -> 2

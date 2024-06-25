@@ -2,6 +2,7 @@
 #include "../include/hashTable.h"
 
 int main(void) {
+    unsigned int numErrors = 0;
     HashTable * ht = createHashTable();
 
     char * keyOne = "Kodabear"; 
@@ -20,47 +21,56 @@ int main(void) {
     char * valueSix = "Steak";
     char * valueSeven = "Chipotle";
 
-    puts("Empty Hash Table:");
-    printHashTable(ht);
+    if (ht->size != 5) {
+        printf("ERROR: Expected empty hash table to have a size 5 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keyOne, valueOne);
-    puts("Hash Table after adding one Item:");
-    printHashTable(ht);
+    addItem(ht, keyOne, valueOne); 
+    if (ht->size != 5) {
+        printf("ERROR: Expected hash table to have a size 5 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keyTwo, valueTwo);
-    puts("Hash Table after adding two Items:");
-    printHashTable(ht);
-    printf("Hash Table size after two items being added: %u\n", ht->size);
+    addItem(ht, keyTwo, valueTwo); 
+    if (ht->size != 5) {
+        printf("ERROR: Expected hash table to have a size 5 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keyThree, valueThree);
-    puts("Hash Table after adding three Items:");
-    printHashTable(ht);
-    printf("Hash Table size after three items being added: %u\n", ht->size);
+    addItem(ht, keyThree, valueThree); 
+    if (ht->size != 13) {
+        printf("ERROR: Expected hash table to have a size 13 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keyFour, valueFour);
-    puts("Hash Table after adding four Items:");
-    printHashTable(ht);
-    printf("Hash Table size after four items being added: %u\n", ht->size);
+    addItem(ht, keyFour, valueFour); 
+    if (ht->size != 13) {
+        printf("ERROR: Expected hash table to have a size 13 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
+    addItem(ht, keyFive, valueFive); 
+    if (ht->size != 13) {
+        printf("ERROR: Expected hash table to have a size 13 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keyFive, valueFive);
-    puts("Hash Table after adding five Items:");
-    printHashTable(ht);
-    printf("Hash Table size after five items being added: %u\n", ht->size);
-    printf("Count after five items: %u\n", ht->count);
+    addItem(ht, keySix, valueSix); 
+    if (ht->size != 13) {
+        printf("ERROR: Expected hash table to have a size 13 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-    addItem(ht, keySix, valueSix);
-    puts("Hash Table after adding Six Items:");
-    printHashTable(ht);
-    printf("Hash Table size after six items being added: %u\n", ht->size);
-    printf("Count after six items: %u\n", ht->count);
+    addItem(ht, keySeven, valueSeven); 
+    if (ht->size != 23) {
+        printf("ERROR: Expected hash table to have a size 23 but instead had %u\n", ht->size);
+        numErrors++;
+    }
 
-
-    addItem(ht, keySeven, valueSeven);
-    puts("Hash Table after adding Seven Items:");
-    printHashTable(ht);
-    printf("Hash Table size after seven items being added: %u\n", ht->size);
-    printf("Count after seven items: %u\n", ht->count);
+    if (numErrors == 0) {
+        printf("All tests passed!\n");
+    }
 
     return 0;
 }

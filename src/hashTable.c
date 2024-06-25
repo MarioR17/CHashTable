@@ -138,7 +138,6 @@ static void resizeHashTable(HashTable * ht) {
     }
 
     free(oldItems);
-
 }
 
 
