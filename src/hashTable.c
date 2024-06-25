@@ -99,11 +99,57 @@ unsigned int hashIndex(HashTable * ht, const char * k) {
     return hash;
 }
 
+static void resizeHashTable(HashTable * ht) {
+    unsigned int originalSize = ht->size;   
+    unsigned int newSize = nextPrime(originalSize);    
+    ht->size = newSize;
+
+    Item ** oldItems = ht->items;
+    Item ** newItems = calloc((size_t) newSize, sizeof(Item *));
+    ht->items = newItems;
+
+    if (newItems == NULL) {
+        printf("ERROR: Could not allocate memory for new items array\n");
+        exit(1);
+    }
+
+    for (unsigned int i = 0; i < originalSize; i++) {
+        if (oldItems[i] != NULL) {
+            char * newKey = strdup(oldItems[i]->key);
+            char * newValue = strdup(oldItems[i]->value);
+            Item * item = createItem(newKey, newValue);
+
+            if (item == NULL) {
+                printf("ERROR: Could not allocate memory for item in newItems\n");
+                free(newKey);
+                free(newValue);
+                deleteHashTable(ht);
+                deleteItem(item);
+                exit(1);
+            }
+            
+            unsigned int keyHash = hashIndex(ht, newKey);
+            ht->items[keyHash] = item;
+        }
+    }
+
+    for (unsigned int i = 0; i < originalSize; i++) {
+        deleteItem(oldItems[i]);
+    }
+
+    free(oldItems);
+
+}
+
+
 void addItem(HashTable * ht, const char * k, const char * v) {
     if (ht != NULL) {
         Item * item = createItem(k, v);
 
         if (item != NULL) {
+            if (ht->count >= (ht->size / 2)) {
+                resizeHashTable(ht);
+            }
             unsigned int keyHash = hashIndex(ht, k);
             ht->items[keyHash] = item;
             ht->count++;
@@ -181,4 +227,3 @@ unsigned int nextPrime(unsigned int num) {
 
     return next;
 }
-
