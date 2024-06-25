@@ -61,21 +61,6 @@ static void deleteItem(Item * i) {
     }
 }
 
-static Item ** reallocZero(Item ** buff, unsigned int originalSize, unsigned int newSize) {
-    Item ** newBuff = realloc(buff, newSize * sizeof(Item *)); 
-
-    if (newBuff == NULL) {
-        printf("ERROR: Unable to reallocate memory for hash table\n");
-        exit(1);
-    }
-
-    for (unsigned int i = originalSize; i < newSize; i++) {
-        newBuff[i] = NULL;
-    }
-
-    return newBuff;
-}
-
 void deleteHashTable(HashTable * ht) {
     if (ht != NULL) {
         for (unsigned int i = 0; i < ht->size; i++) {
@@ -119,16 +104,9 @@ void addItem(HashTable * ht, const char * k, const char * v) {
         Item * item = createItem(k, v);
 
         if (item != NULL) {
-            if (ht->count >= (ht->size / 2)) {
-                HashTable * newHt = reHashTable(ht);
-                unsigned int keyHash = hashIndex(newHt, k);
-                newHt->items[keyHash] = item;
-                newHt->count++;
-            } else {
-                unsigned int keyHash = hashIndex(ht, k);
-                ht->items[keyHash] = item;
-                ht->count++;
-            }
+            unsigned int keyHash = hashIndex(ht, k);
+            ht->items[keyHash] = item;
+            ht->count++;
         } else {
             deleteItem(item);
         }
@@ -203,41 +181,4 @@ unsigned int nextPrime(unsigned int num) {
 
     return next;
 }
-
-void resizeHashTable(HashTable * ht) {
-    unsigned int nextSize = nextPrime(ht->size);
-    unsigned int originalSize = ht->size;
-    ht->size = nextSize;
-    ht->items = reallocZero(ht->items, originalSize, nextSize);        
-    if (ht->items == NULL) {
-        printf("ERROR: Unable to allocate memory for hash table items\n");
-        exit(1);
-    }
-}
-
-
-HashTable * reHashTable(HashTable * oldHt) {
-    HashTable * newHt = createHashTable();
-    printHashTable(oldHt);
-    printHashTable(newHt);
-    newHt->size = oldHt->size;
-    printHashTable(newHt);
-    puts("resizing now");
-    resizeHashTable(newHt);
-    printHashTable(newHt);
-    addItem(newHt, "Gage", "Needs");
-    printHashTable(newHt);
-
-    for (unsigned int i = 0; i < oldHt->size; i++) {
-        if (oldHt->items[i] != NULL) {
-            addItem(newHt, oldHt->items[i]->key, oldHt->items[i]->value);
-        }
-    }
-    printHashTable(oldHt);
-    deleteHashTable(oldHt);
-
-    return newHt;
-}
-
-
 

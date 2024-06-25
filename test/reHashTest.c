@@ -22,25 +22,24 @@ int main(void) {
     char * valueSeven = "Chipotle";
     char * valueEight = "Tacos";
 
-    printf("Current ht size: %u\n", ht->size);
+    printf("%s\n", keyOne);
+    printf("%s\n", keyTwo);
+    printf("%s\n", keyThree);
+    printf("%s\n", keyFour);
+    printf("%s\n", keyFive);
+    printf("%s\n", keySix);
+    printf("%s\n", keySeven);
+    printf("%s\n", keyEight);
 
-    addItem(ht, keyOne, valueOne);
-    printHashTable(ht);
-    addItem(ht, keyTwo, valueTwo);
-    printHashTable(ht);
-    puts("Going in");
-    addItem(ht, keyThree, valueThree);
-    printf("ht size yo2: %u\n", ht->size);
-    addItem(ht, keyFour, valueFour);
-    printf("ht size: %u\n", ht->size);
-    addItem(ht, keyFive, valueFive);
-    printf("ht size: %u\n", ht->size);
-    addItem(ht, keySix, valueSix);
-    printf("ht size: %u\n", ht->size);
-    addItem(ht, keySeven, valueSeven);
-    printf("ht size: %u\n", ht->size);
-    addItem(ht, keyEight, valueEight);
-    printf("ht size: %u\n", ht->size);
+    printf("%s\n", valueOne);
+    printf("%s\n", valueTwo);
+    printf("%s\n", valueThree);
+    printf("%s\n", valueFour);
+    printf("%s\n", valueFive);
+    printf("%s\n", valueSix);
+    printf("%s\n", valueSeven);
+    printf("%s\n", valueEight);
+
     printHashTable(ht);
 
     return 0;
