@@ -28,7 +28,7 @@ int main(void) {
     printHashTable(ht);
     addItem(ht, keyTwo, valueTwo);
     printHashTable(ht);
-    //printf("ht size yo: %u\n", ht->size);
+    puts("Going in");
     addItem(ht, keyThree, valueThree);
     printf("ht size yo2: %u\n", ht->size);
     addItem(ht, keyFour, valueFour);
