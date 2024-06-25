@@ -19,10 +19,10 @@ int main(void) {
     char * valThree = "RL";
     char * valFive = "DoorDash";
 
-    addItem(ht, keyOne, valOne); // 2 -> 2
-    addItem(ht, keyTwo, valTwo); // 4 -> 4
-    addItem(ht, keyThree, valThree); // 4 -> 0
-    addItem(ht, keyFive, valFive); // 0 -> 1
+    addItem(ht, keyOne, valOne); // 4 -> 4
+    addItem(ht, keyTwo, valTwo); // 1 -> 1
+    addItem(ht, keyThree, valThree); // 6 -> 6 (because of resize and rehash)
+    addItem(ht, keyFive, valFive); // 11 -> 11
 
     int idxOne = getIndex(ht, keyOne);
     int idxTwo = getIndex(ht, keyTwo);
@@ -30,24 +30,24 @@ int main(void) {
     int idxFour = getIndex(ht, keyFour);
     int idxFive = getIndex(ht, keyFive);
 
-    if (idxOne != 2) {
-        printf("ERROR: For key \'%s\' expected an of index 2 but was instead %u\n", keyOne, idxOne);
+    if (idxOne != 4) {
+        printf("ERROR: For key \'%s\' expected an index of 4 but was instead %u\n", keyOne, idxOne);
         numErrors++;
     }
-    if (idxTwo != 4) {
-        printf("ERROR: For key \'%s\' expected an of index 4 but was instead %u\n", keyTwo, idxTwo);
+    if (idxTwo != 1) {
+        printf("ERROR: For key \'%s\' expected an index of 1 but was instead %u\n", keyTwo, idxTwo);
         numErrors++;
     }
-    if (idxThree != 0) {
-        printf("ERROR: For key \'%s\' expected an of index 0 but was instead %u\n", keyThree, idxThree);
+    if (idxThree != 6) {
+        printf("ERROR: For key \'%s\' expected an index of 6 but was instead %u\n", keyThree, idxThree);
         numErrors++;
     }
     if (idxFour != -1) {
-        printf("ERROR: For key \'%s\' expected an of index 1 but was instead %u\n", keyFour, idxFour);
+        printf("ERROR: For key \'%s\' expected an index -1 but was instead %u\n", keyFour, idxFour);
         numErrors++;
     }
-    if (idxFive != 1) {
-        printf("ERROR: For key \'%s\' expected an of index 3 but was instead %u\n", keyFive, idxFive);
+    if (idxFive != 11) {
+        printf("ERROR: For key \'%s\' expected an index of 11 but was instead %u\n", keyFive, idxFive);
         numErrors++;
     }
 

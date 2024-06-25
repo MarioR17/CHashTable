@@ -3,6 +3,7 @@
 
 int main(void) {
     // Assumes you're starting at a ht size of 5
+    // Remember primes go every 3 not every one
     HashTable * ht = createHashTable();
 
     printf("Current ht size: %u\n", ht->size);
@@ -10,22 +11,6 @@ int main(void) {
     int nextSize = nextPrime(ht->size);
     ht->size = nextSize;
 
-    if (ht->size != 7) {
-        printf("ERROR: Expected size of 7 but instead was %u\n", ht->size);
-    } else {
-        printf("New ht size is: %u\n", ht->size);
-    }
-
-    nextSize = nextPrime(ht->size);
-    ht->size = nextSize;
-    if (ht->size != 11) {
-        printf("ERROR: Expected size of 11 but instead was %u\n", ht->size);
-    } else {
-        printf("New ht size is: %u\n", ht->size);
-    }
-
-    nextSize = nextPrime(ht->size);
-    ht->size = nextSize;
     if (ht->size != 13) {
         printf("ERROR: Expected size of 13 but instead was %u\n", ht->size);
     } else {
@@ -34,8 +19,24 @@ int main(void) {
 
     nextSize = nextPrime(ht->size);
     ht->size = nextSize;
-    if (ht->size != 17) {
-        printf("ERROR: Expected size of 17 but instead was %u\n", ht->size);
+    if (ht->size != 23) {
+        printf("ERROR: Expected size of 23 but instead was %u\n", ht->size);
+    } else {
+        printf("New ht size is: %u\n", ht->size);
+    }
+
+    nextSize = nextPrime(ht->size);
+    ht->size = nextSize;
+    if (ht->size != 37) {
+        printf("ERROR: Expected size of 37 but instead was %u\n", ht->size);
+    } else {
+        printf("New ht size is: %u\n", ht->size);
+    }
+
+    nextSize = nextPrime(ht->size);
+    ht->size = nextSize;
+    if (ht->size != 47) {
+        printf("ERROR: Expected size of 47 but instead was %u\n", ht->size);
     } else {
         printf("New ht size is: %u\n", ht->size);
     }
