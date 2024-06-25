@@ -22,6 +22,7 @@ int main(void) {
     char * valueSeven = "Chipotle";
     char * valueEight = "Tacos";
 
+    /*
     printf("%s\n", keyOne);
     printf("%s\n", keyTwo);
     printf("%s\n", keyThree);
@@ -41,6 +42,7 @@ int main(void) {
     printf("%s\n", valueEight);
 
     printHashTable(ht);
+    */
 
     return 0;
 }
