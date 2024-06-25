@@ -118,8 +118,11 @@ void addItem(HashTable * ht, const char * k, const char * v) {
             } else {
                 //puts("heh... hey");
                 unsigned int keyHash = hashIndex(ht, k);
+                printf("%s's key hash: %u\n", k, keyHash);
                 ht->items[keyHash] = item;
+                printf("%s:%s\n", ht->items[keyHash]->key, ht->items[keyHash]->value);
                 ht->count++;
+                printf("ht count: %u\n", ht->count);
             }
         } else {
             deleteItem(item);
@@ -131,12 +134,24 @@ void printHashTable(HashTable * ht) {
     if (ht == NULL) {
         printf("{}\n");
     } else {
+        puts("Incoming");
+        if (*(ht->items[10]->key) == '\0' || *(ht->items[10]->value) == '\0') {
+            puts("Brotha");
+        }
+        printf("%s:%s, ", ht->items[5]->key, ht->items[5]->value);
         unsigned int currCount = 0;
+        printf("ht size: %u\n", ht->size);
+        printf("ht count: %u\n", ht->count);
         printf("{ ");
         for (unsigned int i = 0; i < ht->size && currCount < ht->count; i++) {
             if (ht->items[i] != NULL) {
                 currCount++;
+                printf("%u\n", i);
+                if (ht->items[i]->key == NULL || ht->items[i]->value == NULL) {
+                    puts("Brotha");
+                }
                 printf("%s:%s, ", ht->items[i]->key, ht->items[i]->value);
+                puts("Test2");
             }
         }
         printf("}\n");
@@ -231,6 +246,7 @@ HashTable * reHashTable(HashTable * oldHt) {
     puts("Next should be empty");
     addItem(newHt, "Gage", "Needs");
     printHashTable(newHt);
+    puts("Test");
     //printf("%u\n", oldHt->size);
     //printf("%u\n", newHt->size);
 
